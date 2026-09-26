@@ -18,7 +18,9 @@ secrets/
 *.key
 *.pfx
 *.p12
-appsettings.*.local.json
+appsettings.json
+appsettings.*.json
+/docs/clients/MEMORY.md
 **/bin/
 **/obj/
 TestResults/

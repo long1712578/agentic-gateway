@@ -1,8 +1,6 @@
-# Agentic Gateway — bộ tài liệu lập kế hoạch
+# Agentic Gateway — tài liệu kiến trúc và triển khai
 
-Ngày khảo sát: **2026-09-26**. Trạng thái: **đề xuất để review, chưa triển khai**.
-
-**Ràng buộc của chủ dự án: không thay đổi code cho đến khi nhận đúng chỉ thị `start implement`.** Các file trong bộ này chỉ là tài liệu. Không có solution, application code, migration hoặc deployment mới được tạo.
+Ngày khảo sát: **2026-09-26**. Implementation đã bắt đầu theo chỉ thị `start implement`; xem trạng thái source và mức kiểm chứng ở [IMPLEMENTATION_STATUS_VI.md](IMPLEMENTATION_STATUS_VI.md).
 
 Đọc theo thứ tự:
 
@@ -10,8 +8,9 @@ Ngày khảo sát: **2026-09-26**. Trạng thái: **đề xuất để review, c
 2. [Thiết kế kiến trúc .NET](ARCHITECTURE_VI.md): mục tiêu, phạm vi, kiến trúc, giao thức, routing, account, state, bảo mật và vận hành.
 3. [Kế hoạch triển khai](IMPLEMENTATION_PLAN_VI.md): milestone, task, file dự kiến, interface, kiểm thử và điều kiện phát hành.
 4. [Shared Memory và Dreaming](SHARED_MEMORY_VI.md): yêu cầu bổ sung dùng chung kiến thức giữa Kiro/Claude/Copilot/Codex, MCP, scope theo project và worker hợp nhất memory.
+5. [Trạng thái implementation](IMPLEMENTATION_STATUS_VI.md): phần đã có trong source, build hiện tại và các khoảng chưa triển khai.
 
-Đề xuất chính: **ASP.NET Core .NET 10, modular monolith, ưu tiên Codex Responses, native forwarding khi phù hợp và adapter chuyển đổi có kiểm tra capability khi khác giao thức.** OMP là nguồn thiết kế cho provider/catalog và là client kiểm thử tốt; không cần nhúng toàn bộ coding-agent runtime vào gateway.
+Thiết kế chính: **ASP.NET Core .NET 10, modular monolith theo Ports & Adapters, ưu tiên Codex Responses, native forwarding khi phù hợp và adapter chuyển đổi có kiểm tra capability khi khác giao thức.** OMP là nguồn tham khảo cho provider/catalog; gateway không nhúng coding-agent runtime.
 
 Phạm vi đã được bạn xác nhận:
 

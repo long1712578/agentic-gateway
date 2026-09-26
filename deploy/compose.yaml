@@ -1,0 +1,21 @@
+services:
+  agentic-gateway:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8580:8580"
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:8580
+      Memory__DatabasePath: /app/data/memory.db
+      AGENTIC_GATEWAY_API_KEY: ${AGENTIC_GATEWAY_API_KEY:?Set AGENTIC_GATEWAY_API_KEY in .env}
+      AGENTIC_GATEWAY_MCP_API_KEY: ${AGENTIC_GATEWAY_MCP_API_KEY:?Set AGENTIC_GATEWAY_MCP_API_KEY in .env}
+      AGENTIC_GATEWAY_OPENAI_BASE_URL: ${AGENTIC_GATEWAY_OPENAI_BASE_URL:-}
+      AGENTIC_GATEWAY_OPENAI_API_KEY: ${AGENTIC_GATEWAY_OPENAI_API_KEY:-}
+      AGENTIC_GATEWAY_DEFAULT_UPSTREAM_MODEL: ${AGENTIC_GATEWAY_DEFAULT_UPSTREAM_MODEL:-}
+    volumes:
+      - agentic-gateway-data:/app/data
+
+volumes:
+  agentic-gateway-data:

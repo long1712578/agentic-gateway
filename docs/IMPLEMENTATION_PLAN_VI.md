@@ -1,6 +1,6 @@
 # Kế hoạch triển khai Agentic Gateway (.NET, local-first)
 
-> **For agentic workers:** Khi người dùng cho phép triển khai, dùng `superpowers:executing-plans` theo từng task. Chỉ dùng subagent nếu người dùng chọn cách thực thi đó. Mọi checkbox dưới đây đều chưa thực hiện.
+> Kế hoạch baseline để theo dõi phần còn lại. Phạm vi đã được khởi động; xem [IMPLEMENTATION_STATUS_VI.md](IMPLEMENTATION_STATUS_VI.md) để biết lát cắt đã có và giới hạn kiểm chứng.
 
 **Goal:** Codex và các coding client gọi một gateway local để dùng model từ API, server local hoặc proxy đang có; ưu tiên bảo toàn Responses, streaming và tool loop.
 
@@ -11,7 +11,7 @@
 **Spec:** [ARCHITECTURE_VI.md](ARCHITECTURE_VI.md). **Research:** [RESEARCH_VI.md](RESEARCH_VI.md).
 **Scope bổ sung:** [SHARED_MEMORY_VI.md](SHARED_MEMORY_VI.md), MEM-1–MEM-5: memory dùng chung qua MCP và dreaming nền, nằm giữa M1 và V1. Mức capture chưa chốt; selective writes là đề xuất hiện tại.
 
-**Trạng thái:** Chỉ lập tài liệu. Chưa scaffold/build/test sản phẩm. Chỉ bắt đầu implementation khi người dùng gõ **`start implement`**.
+**Trạng thái:** Implementation đang tiến hành. Các checkbox theo mốc bên dưới chưa được cập nhật đầy đủ; không xem chúng là trạng thái hiện tại của source.
 
 ## 1. Phạm vi đã chốt và nguyên tắc thực hiện
 
@@ -27,7 +27,7 @@
 - Native contract được ưu tiên; translation không hỗ trợ feature phải trả lỗi rõ, không âm thầm xóa dữ liệu.
 - Không log prompt, tool output hoặc credential mặc định. Không tuyên bố full compatibility chỉ từ một request trả text.
 
-Các file liệt kê trong tasks là **file dự kiến** tương đối với `agentic-gateway/`, chưa được tạo. Viết tắt `Host/`, `Core/`, `Protocols/`, `Providers/`, `Infrastructure/` tương ứng `src/AgenticGateway.<tên>/`; `UnitTests/`, `ContractTests/`, `IntegrationTests/` tương ứng `tests/AgenticGateway.<tên>/`. Với task có logic: viết test hành vi → chạy lệnh test của task, kỳ vọng failure đúng nguyên nhân → implement → chạy lại, kỳ vọng exit 0 và không test failed → review diff. Không cần tạo test chỉ để kiểm tra tên file hoặc markup tĩnh.
+Các đường dẫn trong tasks là mục tiêu kiến trúc, không nhất thiết trùng với lát cắt source ban đầu. Viết tắt `Host/`, `Core/`, `Protocols/`, `Providers/`, `Infrastructure/` tương ứng `src/AgenticGateway.<tên>/`; `UnitTests/`, `ContractTests/`, `IntegrationTests/` tương ứng `tests/AgenticGateway.<tên>/`. Khi tiếp tục một task, cập nhật acceptance và trạng thái trong [IMPLEMENTATION_STATUS_VI.md](IMPLEMENTATION_STATUS_VI.md).
 
 ## 2. Mốc bàn giao và dự kiến thời gian
 

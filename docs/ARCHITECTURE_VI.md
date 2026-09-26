@@ -14,7 +14,7 @@ Phân biệt client/harness, protocol, provider và model. Codex client dùng Re
 
 MVP không bắt buộc Codex subscription upstream. Nếu model bạn muốn chỉ có qua connector đặc thù, kéo đúng connector đó vào lát cắt đầu; không bắt buộc làm cả ba connector cùng lúc.
 
-Inference gateway không chạy terminal, sửa file hay điều phối subagent. Coding client sở hữu các hoạt động này; gateway chuyển tool call/result để vòng agent hoạt động. Theo yêu cầu bổ sung, cùng host có Shared Memory MCP module phục vụ remember/recall/handoff và dreaming worker riêng; xem [SHARED_MEMORY_VI.md](SHARED_MEMORY_VI.md).
+Inference gateway không chạy terminal, sửa file hay điều phối subagent. Coding client sở hữu các hoạt động này; gateway chuyển tool call/result để vòng agent hoạt động. Theo yêu cầu bổ sung, cùng host có Shared Memory MCP module phục vụ remember/recall/handoff và dreaming. Tool dreaming có trong lát cắt hiện tại; worker theo lịch là phần mở rộng. Xem [SHARED_MEMORY_VI.md](SHARED_MEMORY_VI.md).
 
 ## 2. Business flow và phạm vi
 
@@ -31,7 +31,7 @@ Inference gateway không chạy terminal, sửa file hay điều phối subagent
 
 **MVP:** Responses native trước, generic upstream connection, alias/catalog, gateway key, SSE thật, non-stream, tool/reasoning preservation, SQLite, admin local tối thiểu, Docker.
 
-**Mốc Shared Memory sau Codex alpha:** MCP dùng chung, memory theo project, handoff và dreaming nền cơ bản; mức capture chưa chốt, đề xuất selective writes. Memory dùng được độc lập với inference routing.
+**Mốc Shared Memory sau Codex alpha:** MCP dùng chung, memory theo project, handoff và dreaming. Source hiện có remember/recall cùng dreaming do agent gọi; worker dreaming nền và capture transcript chưa triển khai. Memory dùng được độc lập với inference routing.
 
 **V1 local:** gồm mốc Shared Memory, Messages/Chat adapters, Anthropic native, bridge subset, client setup/E2E, recent requests/usage. Kiro custom inference endpoint chỉ cam kết sau feasibility test; Kiro MCP memory là đường tích hợp riêng.
 

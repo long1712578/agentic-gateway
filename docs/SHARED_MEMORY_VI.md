@@ -25,7 +25,7 @@ flowchart LR
   A --> W
 ```
 
-Đây là chia sẻ kiến thức có thể truy xuất. Không đồng bộ được hidden reasoning, KV cache hay private session state giữa các sản phẩm. Memory hỗ trợ tiếp tục công việc; workspace/files/Git và tool state vẫn cần tồn tại ở client.
+Đây là chia sẻ kiến thức có thể truy xuất. Không đồng bộ được hidden reasoning, KV cache hay private session state giữa các sản phẩm. Memory hỗ trợ tiếp tục công việc; workspace/files/Git và tool state vẫn cần tồn tại ở client. Implementation hiện tại có tool `memory_dream` chạy khi agent chủ động gọi; lịch/background worker chưa triển khai.
 
 ## 2. Vì sao chọn MCP
 

@@ -9,7 +9,8 @@ public sealed class GatewayApiKeys(IConfiguration configuration)
 
     private static byte[] Load(IConfiguration configuration, string configurationKey, string environmentKey)
     {
-        var value = configuration[configurationKey] ?? Environment.GetEnvironmentVariable(environmentKey);
+        var value = Environment.GetEnvironmentVariable(environmentKey);
+        if (string.IsNullOrWhiteSpace(value)) value = configuration[configurationKey];
         if (string.IsNullOrWhiteSpace(value) || Encoding.UTF8.GetByteCount(value) < 32)
         {
             throw new InvalidOperationException($"{environmentKey} must be set to a random value of at least 32 bytes.");

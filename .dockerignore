@@ -22,6 +22,9 @@ secrets/
 *.key
 *.pfx
 *.p12
+auth.json
+**/auth.json
 appsettings.*.local.json
+**/appsettings*.json
 docs/
 tests/

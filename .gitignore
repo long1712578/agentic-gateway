@@ -18,9 +18,12 @@ secrets/
 *.key
 *.pfx
 *.p12
+auth.json
+**/auth.json
 appsettings.json
 appsettings.*.json
 /docs/clients/MEMORY.md
+*.csproj.user
 **/bin/
 **/obj/
 TestResults/

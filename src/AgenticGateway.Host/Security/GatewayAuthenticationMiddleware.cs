@@ -20,13 +20,22 @@ public sealed class GatewayAuthenticationMiddleware(
             return;
         }
 
+        if (context.Request.Path.StartsWithSegments("/admin"))
+        {
+            await next(context);
+            return;
+        }
+
+        var codexAccountMode = context.Request.Path.StartsWithSegments("/codex/v1");
         var expectedKey = context.Request.Path.StartsWithSegments("/mcp") ? apiKeys.Memory : apiKeys.Inference;
-        var supplied = ReadBearerToken(context.Request.Headers.Authorization);
+        var supplied = codexAccountMode
+            ? context.Request.Headers["X-Agentic-Gateway-Key"].ToString()
+            : ReadBearerToken(context.Request.Headers.Authorization);
         if (supplied is null || !CryptographicOperations.FixedTimeEquals(
                 System.Text.Encoding.UTF8.GetBytes(supplied), expectedKey))
         {
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            context.Response.Headers.WWWAuthenticate = "Bearer";
+            if (!codexAccountMode) context.Response.Headers.WWWAuthenticate = "Bearer";
             return;
         }
 

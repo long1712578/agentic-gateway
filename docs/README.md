@@ -9,6 +9,7 @@ Ngày khảo sát: **2026-09-26**. Implementation đã bắt đầu theo chỉ t
 3. [Kế hoạch triển khai](IMPLEMENTATION_PLAN_VI.md): milestone, task, file dự kiến, interface, kiểm thử và điều kiện phát hành.
 4. [Shared Memory và Dreaming](SHARED_MEMORY_VI.md): yêu cầu bổ sung dùng chung kiến thức giữa Kiro/Claude/Copilot/Codex, MCP, scope theo project và worker hợp nhất memory.
 5. [Trạng thái implementation](IMPLEMENTATION_STATUS_VI.md): phần đã có trong source, build hiện tại và các khoảng chưa triển khai.
+6. [Quy trình dùng UI](UI_WORKFLOW_VI.md): khởi động, cấu hình upstream, kết nối client và dùng chung memory.
 
 Thiết kế chính: **ASP.NET Core .NET 10, modular monolith theo Ports & Adapters, ưu tiên Codex Responses, native forwarding khi phù hợp và adapter chuyển đổi có kiểm tra capability khi khác giao thức.** OMP là nguồn tham khảo cho provider/catalog; gateway không nhúng coding-agent runtime.
 

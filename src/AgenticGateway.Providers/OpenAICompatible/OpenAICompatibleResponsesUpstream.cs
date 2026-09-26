@@ -3,13 +3,12 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using AgenticGateway.Core.Responses;
 using AgenticGateway.Core.Routing;
-using Microsoft.Extensions.Options;
 
 namespace AgenticGateway.Providers.OpenAICompatible;
 
 public sealed class OpenAICompatibleResponsesUpstream(
     IHttpClientFactory httpClientFactory,
-    IOptionsMonitor<ResponsesUpstreamOptions> options) : IResponsesUpstream
+    IUpstreamSettings settings) : IResponsesUpstream
 {
     public Task<UpstreamResponseLease> ForwardAsync(
         ModelRoute route,
@@ -17,7 +16,7 @@ public sealed class OpenAICompatibleResponsesUpstream(
         bool streaming,
         CancellationToken cancellationToken = default)
     {
-        var current = options.CurrentValue;
+        var current = settings.GetCurrent();
         if (!Uri.TryCreate(current.BaseUrl, UriKind.Absolute, out var baseUri)
             || baseUri.Scheme is not ("http" or "https")
             || !string.IsNullOrEmpty(baseUri.UserInfo)

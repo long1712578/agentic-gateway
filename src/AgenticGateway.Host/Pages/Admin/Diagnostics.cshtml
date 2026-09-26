@@ -1,0 +1,14 @@
+@page "/admin/diagnostics"
+@model AgenticGateway.Host.Pages.Admin.DiagnosticsModel
+@{
+    ViewData["Title"] = "Chẩn đoán";
+}
+<div class="page-intro"><div><p class="eyebrow">SYSTEM HEALTH</p><h2>Biết chính xác bước nào chưa sẵn sàng</h2><p>Trạng thái này kiểm tra cấu hình và SQLite. Chỉ nút “Gửi yêu cầu thử” ở trang Upstream mới gọi model thật.</p></div></div>
+<section class="panel"><div class="panel-heading"><div><p class="eyebrow">READINESS</p><h2>Thành phần gateway</h2></div></div><div class="diagnostic-list">
+    <div><span>SQLite memory</span><strong class="@(Model.DatabaseReady ? "positive" : "negative")">@(Model.DatabaseReady ? "Sẵn sàng" : "Không kết nối được")</strong></div>
+    <div><span>Upstream Base URL</span><strong class="@(Model.HasBaseUrl ? "positive" : "warning")">@(Model.HasBaseUrl ? "Đã cấu hình" : "Thiếu")</strong></div>
+    <div><span>Upstream API key</span><strong class="@(Model.HasApiKey ? "positive" : "warning")">@(Model.HasApiKey ? "Đã cấu hình" : "Thiếu")</strong></div>
+    <div><span>Alias coding-default</span><strong class="@(Model.HasModel ? "positive" : "warning")">@(Model.HasModel ? "Đã cấu hình" : "Thiếu")</strong></div>
+    <div><span>Nguồn upstream</span><strong>@(Model.EnvironmentManaged ? "Biến môi trường" : "UI / appsettings")</strong></div>
+</div></section>
+<div class="two-column"><section class="panel"><p class="eyebrow">LOCAL FILES</p><h2>Dữ liệu trên máy</h2><p class="muted">SQLite memory</p><code class="path-code">@Model.MemoryPath</code><p class="muted">Admin key</p><code class="path-code">@Model.AdminKeySource</code><p class="fine-print">Backup thư mục dữ liệu có thể chứa memory, admin key và upstream API key. Bảo vệ bản backup như dữ liệu nhạy cảm.</p></section><section class="panel"><p class="eyebrow">ENDPOINTS</p><h2>Địa chỉ hiện tại</h2><div class="code-row"><div><small>Responses base URL</small><code>@($"{Request.Scheme}://{Request.Host}/v1")</code></div></div><div class="code-row"><div><small>Memory MCP</small><code>@($"{Request.Scheme}://{Request.Host}/mcp")</code></div></div><p><a class="text-link" href="/admin/clients">Xem cấu hình từng client →</a></p></section></div>

@@ -6,4 +6,7 @@
     <Project Path="src/AgenticGateway.Protocols/AgenticGateway.Protocols.csproj" />
     <Project Path="src/AgenticGateway.Providers/AgenticGateway.Providers.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AgenticGateway.CodexAccountChecks/AgenticGateway.CodexAccountChecks.csproj" />
+  </Folder>
 </Solution>

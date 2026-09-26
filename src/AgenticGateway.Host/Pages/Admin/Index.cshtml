@@ -1,0 +1,21 @@
+@page "/admin"
+@model AgenticGateway.Host.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "Tổng quan";
+}
+<section class="hero">
+    <div><p class="eyebrow">SETUP GUIDE</p><h2>Một gateway, nhiều coding agent.</h2><p>Thiết lập model một lần, sau đó dùng cùng endpoint và project memory ở các client.</p></div>
+    <a class="button button-primary" href="/admin/upstream">Cấu hình upstream →</a>
+</section>
+<div class="status-grid">
+    <article class="status-card"><span class="card-icon">01</span><p>Host &amp; SQLite</p><strong class="@(Model.DatabaseReady ? "positive" : "negative")">@(Model.DatabaseReady ? "Sẵn sàng" : "Cần kiểm tra")</strong><small>Memory lưu trên máy local</small></article>
+    <article class="status-card"><span class="card-icon">02</span><p>Upstream key</p><strong class="@(Model.UpstreamConfigured ? "positive" : "warning")">@(Model.UpstreamConfigured ? "Đã cấu hình" : "Chưa hoàn tất")</strong><small>Key không hiển thị lại trên UI</small></article>
+    <article class="status-card"><span class="card-icon">03</span><p>Model alias</p><strong>@(Model.HasModel ? "coding-default" : "Chưa có")</strong><small>@Model.ModelId</small></article>
+</div>
+<section class="panel"><div class="panel-heading"><div><p class="eyebrow">WORKFLOW</p><h2>Bắt đầu theo thứ tự</h2></div></div>
+    <ol class="step-list">
+        <li><span class="step-number">1</span><div><strong>Thêm upstream và model</strong><p>Nhập URL, API key và model ID. Sau khi lưu, dùng nút kiểm tra để gửi một yêu cầu nhỏ.</p></div><a href="/admin/upstream">Mở →</a></li>
+        <li><span class="step-number">2</span><div><strong>Kết nối coding client</strong><p>Sao chép cấu hình cho Codex và MCP cho client bạn dùng. Mỗi card ghi rõ khả năng hiện tại.</p></div><a href="/admin/clients">Mở →</a></li>
+        <li><span class="step-number">3</span><div><strong>Chọn projectId chung</strong><p>Dùng cùng một projectId trên Codex, Claude Code, Kiro và Copilot để memory không phân tán.</p></div><a href="/admin/memory">Mở →</a></li>
+    </ol>
+</section>

@@ -1,0 +1,25 @@
+@page "/admin/upstream"
+@model AgenticGateway.Host.Pages.Admin.UpstreamModel
+@{
+    ViewData["Title"] = "Upstream & model";
+}
+<div class="page-intro"><div><p class="eyebrow">01 / MODEL CONNECTION</p><h2>Chọn nơi gateway gọi model</h2><p>Gateway hiện hỗ trợ một upstream tương thích OpenAI Responses. Bạn có thể thay URL và model mà không sửa cấu hình của từng client.</p></div><span class="pill">Responses API</span></div>
+@if (Model.Notice is not null) { <div class="notice success" role="status">@Model.Notice</div> }
+@if (Model.Error is not null) { <div class="notice error" role="alert">@Model.Error</div> }
+@if (Model.EnvironmentManaged) { <div class="notice warning">Cấu hình upstream đang lấy từ biến môi trường. Sửa <code>.env</code> hoặc User Secrets rồi khởi động lại gateway; form bên dưới chỉ để xem.</div> }
+<div class="two-column">
+    <section class="panel"><div class="panel-heading"><div><p class="eyebrow">CONNECTION</p><h2>Thông tin upstream</h2></div><span class="status-dot @(Model.HasApiKey ? "ready" : "")">@(Model.HasApiKey ? "Có API key" : "Thiếu API key")</span></div>
+        <form method="post" asp-page-handler="Save" class="stack form-stack">
+            <div class="form-field"><label asp-for="BaseUrl">Base URL</label><input asp-for="BaseUrl" placeholder="https://api.openai.com/v1" autocomplete="url" required disabled="@Model.EnvironmentManaged" /><small>URL phải kết thúc bằng <code>/v1</code>. Không thêm <code>/responses</code>.</small></div>
+            <div class="form-field"><label asp-for="ModelId">Model ID ở upstream</label><input asp-for="ModelId" placeholder="Model ID mà upstream hỗ trợ" required disabled="@Model.EnvironmentManaged" /><small>Client sẽ thấy alias cố định <code>coding-default</code>.</small></div>
+            <div class="form-field"><label asp-for="ApiKey">API key upstream</label><input asp-for="ApiKey" type="password" value="" placeholder="@(Model.HasApiKey ? "Đã lưu · để trống nếu không đổi" : "Nhập API key")" autocomplete="new-password" disabled="@Model.EnvironmentManaged" /><small>Key đã lưu sẽ không hiển thị lại; nhập key mới để thay.</small></div>
+            <button class="button button-primary" type="submit" disabled="@Model.EnvironmentManaged">Lưu cấu hình</button>
+        </form>
+    </section>
+    <aside class="panel guidance"><p class="eyebrow">QUICK REFERENCE</p><h2>Gateway sẽ làm gì?</h2>
+        <div class="code-row"><div><small>Client model alias</small><code>coding-default</code></div><button class="button button-small" type="button" data-copy="coding-default">Sao chép</button></div>
+        <p>Gateway đổi alias sang model ID bạn chọn và chuyển tiếp request Responses. Key upstream chỉ được gửi tới URL này.</p>
+        <form method="post" asp-page-handler="Probe"><button class="button button-secondary" type="submit">Gửi yêu cầu thử ↗</button></form>
+        <p class="fine-print">Yêu cầu thử gọi model thật với tối đa 16 output tokens và có thể phát sinh chi phí.</p>
+    </aside>
+</div>

@@ -1,0 +1,36 @@
+@{
+    var title = ViewData["Title"] as string ?? "Overview";
+    var path = Context.Request.Path.Value?.ToLowerInvariant() ?? "";
+}
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>@title · Agentic Gateway</title>
+    <link rel="stylesheet" href="/admin/assets/admin.css" />
+</head>
+<body>
+    <div class="shell">
+        <aside class="sidebar" aria-label="Điều hướng quản trị">
+            <a class="brand" href="/admin"><span class="brand-mark">◇</span><span><strong>Agentic Gateway</strong><small>Local control room</small></span></a>
+            <p class="nav-caption">WORKSPACE</p>
+            <nav class="navigation">
+                <a class="nav-link @(path == "/admin" ? "active" : "")" href="/admin">Tổng quan</a>
+                <a class="nav-link @(path.StartsWith("/admin/upstream") ? "active" : "")" href="/admin/upstream">Upstream &amp; model</a>
+                <a class="nav-link @(path.StartsWith("/admin/clients") ? "active" : "")" href="/admin/clients">Kết nối client</a>
+                <a class="nav-link @(path.StartsWith("/admin/memory") ? "active" : "")" href="/admin/memory">Shared Memory</a>
+                <a class="nav-link @(path.StartsWith("/admin/diagnostics") ? "active" : "")" href="/admin/diagnostics">Chẩn đoán</a>
+            </nav>
+            <div class="sidebar-foot"><span class="live-dot"></span> Chỉ truy cập từ máy local<br /><small>Responses + MCP · .NET 10</small></div>
+        </aside>
+        <div class="main-area">
+            <header class="topbar"><div><p class="eyebrow">AGENTIC GATEWAY / ADMIN</p><h1>@title</h1></div><form method="post" asp-page="/Admin/Login" asp-page-handler="Logout"><button class="button button-quiet" type="submit">Đăng xuất</button></form></header>
+            <main class="content">@RenderBody()</main>
+        </div>
+    </div>
+    <script src="/admin/assets/admin.js" defer></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

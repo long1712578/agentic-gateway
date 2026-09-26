@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgenticGateway.Core\AgenticGateway.Core.csproj" />
+    <ProjectReference Include="..\AgenticGateway.Protocols\AgenticGateway.Protocols.csproj" />
+    <ProjectReference Include="..\AgenticGateway.Providers\AgenticGateway.Providers.csproj" />
+    <ProjectReference Include="..\AgenticGateway.Infrastructure\AgenticGateway.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>

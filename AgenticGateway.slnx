@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AgenticGateway.Core/AgenticGateway.Core.csproj" />
+    <Project Path="src/AgenticGateway.Host/AgenticGateway.Host.csproj" />
+    <Project Path="src/AgenticGateway.Infrastructure/AgenticGateway.Infrastructure.csproj" />
+    <Project Path="src/AgenticGateway.Protocols/AgenticGateway.Protocols.csproj" />
+    <Project Path="src/AgenticGateway.Providers/AgenticGateway.Providers.csproj" />
+  </Folder>
+</Solution>

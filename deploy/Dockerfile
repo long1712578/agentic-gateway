@@ -9,7 +9,7 @@ COPY src/AgenticGateway.Providers/ src/AgenticGateway.Providers/
 COPY src/AgenticGateway.Infrastructure/ src/AgenticGateway.Infrastructure/
 COPY src/AgenticGateway.Host/ src/AgenticGateway.Host/
 
-RUN dotnet restore AgenticGateway.slnx --configfile NuGet.Config
+RUN dotnet restore src/AgenticGateway.Host/AgenticGateway.Host.csproj --configfile NuGet.Config
 RUN dotnet publish src/AgenticGateway.Host/AgenticGateway.Host.csproj \
     --configuration Release --no-restore --output /app/publish
 
